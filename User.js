@@ -8,14 +8,14 @@ const userSchema = new mongoose.Schema({
     max: 100,
     validate: {
       //will validate the value passed in for age
-      validator: (v) => v % 2,
+      validator: (v) => v % 2 === 0,
       message: (props) => `${props.value} is not an even number`,
     },
   },
   email: String,
   createdAt: { type: Date, default: () => Date.now(), immutable: true },
   updatedAt: { type: Date, default: () => Date.now() },
-  bestFriend: mongoose.SchemaTypes.ObjectId,
+  bestFriend: { type: mongoose.SchemaTypes.ObjectId, ref: "User" },
   hobbies: [String],
   address: {
     street: String,
